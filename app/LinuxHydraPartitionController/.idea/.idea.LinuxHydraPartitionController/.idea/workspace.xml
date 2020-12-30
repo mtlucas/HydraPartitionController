@@ -5,31 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="477c70de-f288-42c8-9783-dbde509aecfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PatientDecompensation/.idea/.idea.PatientDecompensation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/.idea.Linux Hydra Partition Controller/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/.idea.Linux Hydra Partition Controller/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/.idea.Linux Hydra Partition Controller/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/.idea.Linux Hydra Partition Controller/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller.sln" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/Linux Hydra Partition Controller.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/Startup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Debug/net5.0/.NETCoreApp,Version=v5.0.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Debug/net5.0/Linux Hydra Partition Controller.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Debug/net5.0/Linux Hydra Partition Controller.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Debug/net5.0/Linux Hydra Partition Controller.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Debug/net5.0/Linux Hydra Partition Controller.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Debug/net5.0/Linux Hydra Partition Controller.csprojAssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Linux Hydra Partition Controller.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Linux Hydra Partition Controller.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/Linux Hydra Partition Controller.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/project.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Linux Hydra Partition Controller/obj/rider.project.restore.info" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/WeatherForecastController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/WeatherForecast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,17 +17,28 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/WeatherForecastController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10AF6991-8A27-47DD-A119-1CC3EA8CADC5/70/RouteAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10AF6991-8A27-47DD-A119-1CC3EA8CADC5/38/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Startup.cs" />
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Dockerfile" />
+      <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/WeatherForecastController.cs" />
+      <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" />
+      <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1lpsCSsXmvTtB8SM8JFlc3m1TBm" />
@@ -105,7 +96,19 @@
       <workItem from="1608305246812" duration="498000" />
       <workItem from="1608323184573" duration="281000" />
       <workItem from="1608323869915" duration="313000" />
+      <workItem from="1608324193202" duration="430000" />
+      <workItem from="1608570573426" duration="3110000" />
+      <workItem from="1608652547371" duration="495000" />
+      <workItem from="1609345217079" duration="1941000" />
     </task>
+    <task id="LOCAL-00001" summary="DEVOPS-1931 - Start by copying existing project.">
+      <created>1608324285684</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608324285684</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,5 +128,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="DEVOPS-1931 - Start by copying existing project." />
+    <option name="LAST_COMMIT_MESSAGE" value="DEVOPS-1931 - Start by copying existing project." />
   </component>
 </project>
