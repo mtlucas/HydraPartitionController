@@ -28,7 +28,6 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 **/.idea
-workspace.xml
 .vs/
 #Nuget packages folder
 packages/
