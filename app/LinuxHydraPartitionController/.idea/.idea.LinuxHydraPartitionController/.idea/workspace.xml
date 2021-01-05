@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="477c70de-f288-42c8-9783-dbde509aecfd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +28,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/B4F3745E-CDDB-4F7F-925E-80481F0EA0F4/6/EndpointRoutingApplicationBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10AF6991-8A27-47DD-A119-1CC3EA8CADC5/70/RouteAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/C17F5BB5-6F34-4890-962B-F8B53F09AD83/3B/StatusCodes.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///home/work/RiderProjects/Linux Hydra Partition Controller/app/LinuxHydraPartitionController/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10AF6991-8A27-47DD-A119-1CC3EA8CADC5/38/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///home/work/RiderProjects/Linux Hydra Partition Controller/app/LinuxHydraPartitionController/LinuxHydraPartitionController.Api.WebHost/Partition.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -40,6 +40,7 @@
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/WeatherForecastController.cs" />
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" />
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" />
+      <option value="$PROJECT_DIR$/../../.gitignore" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1lpsCSsXmvTtB8SM8JFlc3m1TBm" />
@@ -110,6 +111,7 @@
       <workItem from="1609774282541" duration="2655000" />
       <workItem from="1609785892586" duration="7115000" />
       <workItem from="1609853556783" duration="613000" />
+      <workItem from="1609858008353" duration="4887000" />
     </task>
     <task id="LOCAL-00001" summary="DEVOPS-1931 - Start by copying existing project.">
       <created>1608324285684</created>
@@ -125,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609347743103</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="DEVOPS-1931 - Near limit of what can be done without bash scripts or service.">
+      <created>1609858224157</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1609858224157</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +156,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="DEVOPS-1931 - Start by copying existing project." />
     <MESSAGE value="DEVOPS-1931 - Progress." />
-    <option name="LAST_COMMIT_MESSAGE" value="DEVOPS-1931 - Progress." />
+    <MESSAGE value="DEVOPS-1931 - Near limit of what can be done without bash scripts or service." />
+    <option name="LAST_COMMIT_MESSAGE" value="DEVOPS-1931 - Near limit of what can be done without bash scripts or service." />
   </component>
 </project>
