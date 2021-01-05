@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="477c70de-f288-42c8-9783-dbde509aecfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/WeatherForecastController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/WeatherForecast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +26,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10AF6991-8A27-47DD-A119-1CC3EA8CADC5/1C/ControllerEndpointRouteBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/B4F3745E-CDDB-4F7F-925E-80481F0EA0F4/6/EndpointRoutingApplicationBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10AF6991-8A27-47DD-A119-1CC3EA8CADC5/70/RouteAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/C17F5BB5-6F34-4890-962B-F8B53F09AD83/3B/StatusCodes.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10AF6991-8A27-47DD-A119-1CC3EA8CADC5/38/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -37,8 +38,8 @@
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Startup.cs" />
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Dockerfile" />
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/WeatherForecastController.cs" />
-      <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" />
       <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Controllers/PartitionController.cs" />
+      <option value="$PROJECT_DIR$/LinuxHydraPartitionController.Api.WebHost/Partition.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1lpsCSsXmvTtB8SM8JFlc3m1TBm" />
@@ -51,6 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.LinuxHydraPartitionController.Api.WebHost">
@@ -99,7 +101,15 @@
       <workItem from="1608324193202" duration="430000" />
       <workItem from="1608570573426" duration="3110000" />
       <workItem from="1608652547371" duration="495000" />
-      <workItem from="1609345217079" duration="1941000" />
+      <workItem from="1609345217079" duration="2773000" />
+      <workItem from="1609351109422" duration="18000" />
+      <workItem from="1609351172587" duration="27000" />
+      <workItem from="1609351437937" duration="591000" />
+      <workItem from="1609355187230" duration="2102000" />
+      <workItem from="1609769473087" duration="1802000" />
+      <workItem from="1609774282541" duration="2655000" />
+      <workItem from="1609785892586" duration="7115000" />
+      <workItem from="1609853556783" duration="613000" />
     </task>
     <task id="LOCAL-00001" summary="DEVOPS-1931 - Start by copying existing project.">
       <created>1608324285684</created>
@@ -108,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608324285684</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="DEVOPS-1931 - Progress.">
+      <created>1609347743103</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1609347743103</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +146,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="DEVOPS-1931 - Start by copying existing project." />
-    <option name="LAST_COMMIT_MESSAGE" value="DEVOPS-1931 - Start by copying existing project." />
+    <MESSAGE value="DEVOPS-1931 - Progress." />
+    <option name="LAST_COMMIT_MESSAGE" value="DEVOPS-1931 - Progress." />
   </component>
 </project>
