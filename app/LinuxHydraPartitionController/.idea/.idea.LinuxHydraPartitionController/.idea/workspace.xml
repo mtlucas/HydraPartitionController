@@ -4,7 +4,9 @@
     <projectFile>LinuxHydraPartitionController.Api.WebHost/LinuxHydraPartitionController.Api.WebHost.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="477c70de-f288-42c8-9783-dbde509aecfd" name="Default Changelist" comment="" />
+    <list default="true" id="477c70de-f288-42c8-9783-dbde509aecfd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LinuxHydraPartitionController/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +111,7 @@
       <workItem from="1609774282541" duration="2655000" />
       <workItem from="1609785892586" duration="7115000" />
       <workItem from="1609853556783" duration="613000" />
-      <workItem from="1609858008353" duration="5244000" />
+      <workItem from="1609858008353" duration="6150000" />
     </task>
     <task id="LOCAL-00001" summary="DEVOPS-1931 - Start by copying existing project.">
       <created>1608324285684</created>
@@ -146,7 +148,28 @@
       <option name="project" value="LOCAL" />
       <updated>1609869651312</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="DEVOPS-1931 - Whatevs, I hate JetBrains .idea files.">
+      <created>1609869995066</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1609869995066</updated>
+    </task>
+    <task id="LOCAL-00007" summary="DEVOPS-1931 - Whatevs, I hate JetBrains .idea files.">
+      <created>1609870097574</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1609870097574</updated>
+    </task>
+    <task id="LOCAL-00008" summary="DEVOPS-1931 - Whatevs, I hate JetBrains .idea files.">
+      <created>1609870752652</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1609870752652</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
