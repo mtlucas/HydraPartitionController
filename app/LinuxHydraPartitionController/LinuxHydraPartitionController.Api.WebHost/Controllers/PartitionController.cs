@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 namespace LinuxHydraPartitionController.Api.WebHost.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("partitions")]
     public class PartitionController : ControllerBase
     {
         private readonly ILogger<Partition> _logger;
@@ -19,17 +19,19 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         public PartitionController(ILogger<Partition> logger, IConfiguration configuration)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            
             if (configuration is null)
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
-            var partitionIds = configuration.GetValue<List<int>>("PartitionIds");
+            var partitionIdsSection = configuration.GetSection("PartitionIds") ?? throw new ArgumentNullException(nameof(configuration));
+            var partitionIds = partitionIdsSection.Get<List<int>>() ?? throw new ArgumentNullException(nameof(configuration));
             _partitions = partitionIds
                 .Select(index => new Partition(index))
                 .ToArray();
         }
 
-        [HttpGet]
+        [HttpGet("")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<Partition> Get()
@@ -37,11 +39,10 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             return _partitions;
         }
 
-        [HttpPost]
-        [Route("[controller]")]
+        [HttpPost("{id}/restart")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public void Restart(int id)
+        public void Restart([FromRoute] int id)
         {
             _partitions.ToArray()
                 .First(partition => partition.IdMatches(id))
