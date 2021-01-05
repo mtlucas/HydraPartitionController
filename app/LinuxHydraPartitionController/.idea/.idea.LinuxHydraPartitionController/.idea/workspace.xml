@@ -111,7 +111,7 @@
       <workItem from="1609774282541" duration="2655000" />
       <workItem from="1609785892586" duration="7115000" />
       <workItem from="1609853556783" duration="613000" />
-      <workItem from="1609858008353" duration="6150000" />
+      <workItem from="1609858008353" duration="6862000" />
     </task>
     <task id="LOCAL-00001" summary="DEVOPS-1931 - Start by copying existing project.">
       <created>1608324285684</created>
@@ -169,7 +169,21 @@
       <option name="project" value="LOCAL" />
       <updated>1609870752652</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="DEVOPS-1931 - Whatevs, I hate JetBrains .idea files.">
+      <created>1609870765494</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1609870765494</updated>
+    </task>
+    <task id="LOCAL-00010" summary="DEVOPS-1931 - One more attempt, I hate JetBrains .idea files.">
+      <created>1609871385668</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1609871385668</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +208,7 @@
     <MESSAGE value="DEVOPS-1931 - Near limit of what can be done without bash scripts or service." />
     <MESSAGE value="DEVOPS-1931 - Update README.md" />
     <MESSAGE value="DEVOPS-1931 - Whatevs, I hate JetBrains .idea files." />
-    <option name="LAST_COMMIT_MESSAGE" value="DEVOPS-1931 - Whatevs, I hate JetBrains .idea files." />
+    <MESSAGE value="DEVOPS-1931 - One more attempt, I hate JetBrains .idea files." />
+    <option name="LAST_COMMIT_MESSAGE" value="DEVOPS-1931 - One more attempt, I hate JetBrains .idea files." />
   </component>
 </project>
