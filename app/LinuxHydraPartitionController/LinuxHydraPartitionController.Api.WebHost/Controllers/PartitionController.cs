@@ -44,9 +44,28 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public void Restart([FromRoute] int id)
         {
-            _partitions.ToArray()
-                .First(partition => partition.IdMatches(id))
-                .Restart();
+            GetPartitionById(id).Restart();
+        }
+        
+        [HttpPost("{id}/start")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public void Start([FromRoute] int id)
+        {
+            GetPartitionById(id).Start();
+        }
+        
+        [HttpPost("{id}/stop")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public void Stop([FromRoute] int id)
+        {
+            GetPartitionById(id).Stop();
+        }
+
+        private Partition GetPartitionById(int id)
+        {
+            return _partitions.ToArray().Single(partition => partition.IdMatches(id));
         }
     }
 }
