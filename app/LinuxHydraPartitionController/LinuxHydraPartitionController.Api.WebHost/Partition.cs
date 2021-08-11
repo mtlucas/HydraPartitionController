@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace LinuxHydraPartitionController.Api.WebHost
 {
@@ -9,22 +10,26 @@ namespace LinuxHydraPartitionController.Api.WebHost
         public string StartPath { get; }
         public string RestartPath { get; }
 
+        private readonly ILogger<Partition> _logger;
         private readonly ProcessStartInfo _restartProcessStartInfo;
         private readonly ProcessStartInfo _startProcessStartInfo;
         private readonly ProcessStartInfo _stopProcessStartInfo;
 
-        internal Partition(int id)
+        internal Partition(ILogger<Partition> logger, int id)
         {
+            _logger = logger;
             Id = id;
-            
+
             StartPath = $"{Id}/start";
             _startProcessStartInfo = BuildProcessStartInfo("start");
-            
+
             StopPath = $"{Id}/stop";
             _stopProcessStartInfo = BuildProcessStartInfo("stop");
-            
+
             RestartPath = $"{Id}/restart";
             _restartProcessStartInfo = BuildProcessStartInfo("restart");
+
+            _logger.Log(LogLevel.Critical, $"Created partition {id}");
         }
 
         public bool IdMatches(int id)
@@ -34,23 +39,32 @@ namespace LinuxHydraPartitionController.Api.WebHost
 
         public void Restart()
         {
-            Execute(_restartProcessStartInfo);  
+            _logger.Log(LogLevel.Critical, $"Restarting partition {Id}.");
+            Execute(_restartProcessStartInfo);
+            _logger.Log(LogLevel.Critical, $"Finished restarting partition {Id}.");
         }
 
         public void Start()
         {
-            Execute(_startProcessStartInfo);  
+            _logger.Log(LogLevel.Critical, $"Starting partition {Id}.");
+            Execute(_startProcessStartInfo);
+            _logger.Log(LogLevel.Critical, $"Finished starting partition {Id}.");
         }
 
         public void Stop()
         {
-            Execute(_stopProcessStartInfo);        }
+            _logger.Log(LogLevel.Critical, $"Stopping partition {Id}.");
+            Execute(_stopProcessStartInfo);
+            _logger.Log(LogLevel.Critical, $"Finished stopping partition {Id}.");
+        }
 
         private void Execute(ProcessStartInfo processStartInfo)
         {
             var proc = new Process {StartInfo = processStartInfo};
             proc.Start();
             var error = proc.StandardError;
+            var output = error.ReadToEnd();
+            _logger.Log(LogLevel.Error, $"For partition {Id}: {output}");
         }
 
         private ProcessStartInfo BuildProcessStartInfo(string state)
@@ -64,5 +78,5 @@ namespace LinuxHydraPartitionController.Api.WebHost
                 Arguments = $"-c '/usr/bin/systemctl {state} gos_hpu_{Id}.service'"
             };
         }
-}
+    }
 }

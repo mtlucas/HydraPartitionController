@@ -79,7 +79,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
                 var output = reader.ReadToEnd();
                 process.WaitForExit();
                 var lines = output.Split("\n");
-                var pattern = new Regex("^\\s*gos_hpu_(?<partition>\\d+)\\s+.*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                var pattern = new Regex("^gos_hpu_(?<partition>\\d+)\\s+.*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                 foreach (var line in lines)
                 {
                     var matches = pattern.Matches(line);
@@ -87,7 +87,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
                     {
                         var partitionString = match.Groups["partition"].Value;
                         var partitionId = int.Parse(partitionString);
-                        var partition = new Partition(partitionId);
+                        var partition = new Partition(_logger, partitionId);
                         partitions.Add(partition);
                     }
                 }
