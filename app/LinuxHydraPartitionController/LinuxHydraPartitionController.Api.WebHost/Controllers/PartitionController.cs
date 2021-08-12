@@ -77,6 +77,11 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
                 process.Start();
                 var reader = process.StandardOutput;
                 var output = reader.ReadToEnd();
+
+                var error = process.StandardError;
+                var errorOutput = error.ReadToEnd();
+                _logger.Log(LogLevel.Error, $"Process Error: {errorOutput}");
+
                 process.WaitForExit();
                 _logger.Log(LogLevel.Critical, output);
                 var lines = output.Split("\n");
