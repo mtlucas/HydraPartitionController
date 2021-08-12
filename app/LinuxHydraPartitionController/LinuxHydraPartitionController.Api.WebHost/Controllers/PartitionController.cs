@@ -22,6 +22,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _partitions = GetPartitions();
+            _logger.Log(LogLevel.Error, "Starting...");
         }
 
         [HttpGet("")]
