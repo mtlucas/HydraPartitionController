@@ -74,6 +74,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             };
             using (var process = new Process { StartInfo = processStartInfo })
             {
+                _logger.Log(LogLevel.Error, "Starting process");
                 process.Start();
                 var reader = process.StandardOutput;
                 var output = reader.ReadToEnd();
