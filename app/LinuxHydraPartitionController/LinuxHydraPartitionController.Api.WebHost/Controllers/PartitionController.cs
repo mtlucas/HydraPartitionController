@@ -77,8 +77,8 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
                 process.Start();
                 var reader = process.StandardOutput;
                 var output = reader.ReadToEnd();
-                _logger.Log(LogLevel.Critical, output);
                 process.WaitForExit();
+                _logger.Log(LogLevel.Critical, output);
                 var lines = output.Split("\n");
                 var pattern = new Regex("^gos_hpu_(?<partition>\\d+)\\s+.*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                 foreach (var line in lines)
