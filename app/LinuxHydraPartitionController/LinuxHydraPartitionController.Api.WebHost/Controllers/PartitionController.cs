@@ -49,7 +49,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             return GetPartitionById(id);
         }
 
-        [HttpGet("{id:int}/restart")]
+        [HttpPost("restart/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public void Restart([FromRoute] int id)
@@ -67,7 +67,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             GetPartitionById(id).Start();
         }
 
-        [HttpPost("{id:int}/stop")]
+        [HttpPost("stop/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public void Stop([FromRoute] int id)
