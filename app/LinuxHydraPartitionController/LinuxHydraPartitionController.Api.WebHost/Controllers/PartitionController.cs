@@ -67,7 +67,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             GetPartitionById(id).Start();
         }
 
-        [HttpGet("stop/{id:int}")]
+        [HttpPost("stop/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public void Stop([FromRoute] int id)
