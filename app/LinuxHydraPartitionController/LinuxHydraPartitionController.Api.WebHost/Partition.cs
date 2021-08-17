@@ -67,13 +67,15 @@ namespace LinuxHydraPartitionController.Api.WebHost
 
         private ProcessStartInfo BuildProcessStartInfo(string state)
         {
+            var arguments = $"-c \"/usr/bin/systemctl {state} gos_hpu_{Id}.service\"";
+            _logger.Log(LogLevel.Critical, arguments);
             return new ProcessStartInfo
             {
                 FileName = "/bin/bash",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                Arguments = $"-c \"/usr/bin/systemctl {state} gos_hpu_{Id}.service\""
+                Arguments = arguments
             };
         }
     }
