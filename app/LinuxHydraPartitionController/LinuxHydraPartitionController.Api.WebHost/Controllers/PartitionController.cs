@@ -21,7 +21,6 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         public PartitionController(ILogger<Partition> logger, IConfiguration configuration)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _logger.Log(LogLevel.Critical, "Starting...");
             if (configuration is null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -31,7 +30,6 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             _partitions = partitionIds
                 .Select(index => new Partition(_logger, index))
                 .ToArray();
-            _logger.Log(LogLevel.Error, "Started...");
         }
 
         [HttpGet("")]

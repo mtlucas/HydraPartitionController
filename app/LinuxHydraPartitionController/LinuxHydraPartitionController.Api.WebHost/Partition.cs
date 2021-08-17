@@ -20,16 +20,14 @@ namespace LinuxHydraPartitionController.Api.WebHost
             _logger = logger;
             Id = id;
 
-            StartPath = $"{Id}/start";
+            StartPath = $"/partitions/{Id}/start";
             _startProcessStartInfo = BuildProcessStartInfo("start");
 
-            StopPath = $"{Id}/stop";
+            StopPath = $"/partitions/{Id}/stop";
             _stopProcessStartInfo = BuildProcessStartInfo("stop");
 
-            RestartPath = $"{Id}/restart";
+            RestartPath = $"/partitions/{Id}/restart";
             _restartProcessStartInfo = BuildProcessStartInfo("restart");
-
-            _logger.Log(LogLevel.Critical, $"Created partition {id}");
         }
 
         public bool IdMatches(int id)
