@@ -45,6 +45,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public void Restart([FromRoute] int id)
         {
+            _logger.Log(LogLevel.Critical, $"Finished starting partition {id}.");
             GetPartitionById(id).Restart();
         }
 
