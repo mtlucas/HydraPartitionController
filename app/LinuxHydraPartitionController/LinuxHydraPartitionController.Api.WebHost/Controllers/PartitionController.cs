@@ -22,7 +22,10 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _logger.Log(LogLevel.Critical, "Starting...");
-            _partitions = GetPartitions();
+            var partitionIds = partitionIdsSection.Get<List<int>>() ?? throw new ArgumentNullException(nameof(configuration));
+            _partitions = partitionIds
+                .Select(index => new Partition(_logger, index))
+                .ToArray();
             _logger.Log(LogLevel.Error, "Started...");
         }
 
@@ -61,47 +64,6 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         private Partition GetPartitionById(int id)
         {
             return _partitions.ToArray().Single(partition => partition.IdMatches(id));
-        }
-
-        private List<Partition> GetPartitions()
-        {
-            var partitions = new List<Partition>();
-            var processStartInfo = new ProcessStartInfo
-            {
-                FileName = "/bin/bash",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                Arguments = "-c '/usr/bin/systemctl list-units --type=service | /usr/bin/grep gos_hpu_'"
-            };
-            using (var process = new Process { StartInfo = processStartInfo })
-            {
-                _logger.Log(LogLevel.Error, "Starting process");
-                process.Start();
-                var reader = process.StandardOutput;
-                var output = reader.ReadToEnd();
-
-                var error = process.StandardError;
-                var errorOutput = error.ReadToEnd();
-                _logger.Log(LogLevel.Error, $"Process Error: {errorOutput}");
-
-                process.WaitForExit();
-                _logger.Log(LogLevel.Critical, output);
-                var lines = output.Split("\n");
-                var pattern = new Regex("^gos_hpu_(?<partition>\\d+)\\s+.*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                foreach (var line in lines)
-                {
-                    var matches = pattern.Matches(line);
-                    foreach (Match match in matches)
-                    {
-                        var partitionString = match.Groups["partition"].Value;
-                        var partitionId = int.Parse(partitionString);
-                        var partition = new Partition(_logger, partitionId);
-                        partitions.Add(partition);
-                    }
-                }
-            }
-            return partitions;
         }
     }
 }
