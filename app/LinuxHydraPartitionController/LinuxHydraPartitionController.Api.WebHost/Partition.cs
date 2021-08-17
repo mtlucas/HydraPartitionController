@@ -73,7 +73,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                Arguments = $"-c '/usr/bin/systemctl {state} gos_hpu_{Id}.service'"
+                Arguments = $"-c \"/usr/bin/systemctl {state} gos_hpu_{Id}.service\""
             };
         }
     }
