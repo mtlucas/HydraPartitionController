@@ -71,7 +71,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             _logger.Log(LogLevel.Critical, arguments);
             return new ProcessStartInfo
             {
-                FileName = "/bin/bash",
+                FileName = "/usr/bin/bash",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
