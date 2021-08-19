@@ -7,6 +7,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Mime;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 
@@ -80,11 +81,31 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             var partitions = new List<Partition>();
             using (StreamReader streamReader = new StreamReader(file))
             {
-                string jsonString = streamReader.ReadToEnd();
-                _logger.Log(LogLevel.Critical, jsonString);
-
+                var jsonString = streamReader.ReadToEnd();
+                var gosConfig = JsonSerializer.Deserialize<GosConfig>(jsonString);
+                gosConfig.machines.ForEach(machineConfig =>
+                {
+                    machineConfig.partitions.ForEach(partitionConfig =>
+                    {
+                        var partition = new Partition(_logger, partitionConfig.partition);
+                        partitions.Add(partition);
+                    });
+                });
             }
             return partitions;
+        }
+
+        public class GosConfig
+        {
+            public List<MachineConfig> machines { get; set; }
+        }
+        public class MachineConfig
+        {
+            public List<PartitionConfig> partitions { get; set; }
+        }
+        public class PartitionConfig
+        {
+            public int partition { get; set; }
         }
     }
 }
