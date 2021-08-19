@@ -25,6 +25,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
+            _logger.Log(LogLevel.Critical, configuration);
             _partitions = new List<Partition>();
             var machineJsons = configuration.GetSection("machines").Get<List<IConfigurationSection>>() ?? throw new ArgumentNullException(nameof(configuration));
             machineJsons.ForEach(machineJson =>
