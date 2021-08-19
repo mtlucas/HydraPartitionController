@@ -25,11 +25,18 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
-            var partitionIdsSection = configuration.GetSection("PartitionIds") ?? throw new ArgumentNullException(nameof(configuration));
-            var partitionIds = partitionIdsSection.Get<List<int>>() ?? throw new ArgumentNullException(nameof(configuration));
-            _partitions = partitionIds
-                .Select(index => new Partition(_logger, index))
-                .ToArray();
+            _partitions = new List<Partition>();
+            var machineJsons = configuration.GetSection("machines").Get<List<IConfigurationSection>>() ?? throw new ArgumentNullException(nameof(configuration));
+            machineJsons.ForEach(machineJson =>
+            {
+                var partitionJsons = machineJson.GetSection("partitions").Get<List<IConfiguration>>();
+                partitionJsons.ForEach(partitionJson =>
+                {
+                    var partitionId = partitionJson.GetSection("partition").Get<int>();
+                    var partition = new Partition(_logger, partitionId);
+                    _partitions.Append(partition);
+                });
+            });
         }
 
         [HttpGet("")]
