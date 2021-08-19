@@ -25,11 +25,8 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
-            var partitionIdsSection = configuration.GetSection("PartitionIds") ?? throw new ArgumentNullException(nameof(configuration));
-            var partitionIds = partitionIdsSection.Get<List<int>>() ?? throw new ArgumentNullException(nameof(configuration));
-            _partitions = partitionIds
-                .Select(index => new Partition(_logger, index))
-                .ToArray();
+            String gosFilePath = configuration.GetSection("GosConfigPath").Get<String>();
+            _partitions = BuildPartitions(gosFilePath);
         }
 
         [HttpGet("")]
@@ -75,6 +72,18 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         private Partition GetPartitionById(int id)
         {
             return _partitions.ToArray().Single(partition => partition.IdMatches(id));
+        }
+
+        private IEnumerable<Partition> BuildPartitions(string file)
+        {
+            var partitions = new Lazy<Partition>();
+            using (StreamReader streamReader = new StreamReader(file))
+            {
+                string jsonString = streamReader.ReadToEnd();
+                _logger.Log(LogLevel.Critical, jsonString);
+
+            }
+            return partitions;
         }
     }
 }

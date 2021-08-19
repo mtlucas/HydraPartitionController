@@ -62,20 +62,21 @@ namespace LinuxHydraPartitionController.Api.WebHost
             proc.Start();
             var error = proc.StandardError;
             var output = error.ReadToEnd();
-            _logger.Log(LogLevel.Error, $"For partition {Id}: {output}");
+            if(output.Length > 0)
+            {
+                _logger.Log(LogLevel.Error, $"For partition {Id}: {output}");
+            }
         }
 
         private ProcessStartInfo BuildProcessStartInfo(string state)
         {
-            var arguments = $"-c \"/usr/bin/systemctl {state} gos_hpu_{Id}.service\"";
-            _logger.Log(LogLevel.Critical, arguments);
             return new ProcessStartInfo
             {
                 FileName = "/usr/bin/bash",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                Arguments = arguments
+                Arguments = $"-c \"/usr/bin/systemctl {state} gos_hpu_{Id}.service\""
             };
         }
     }
