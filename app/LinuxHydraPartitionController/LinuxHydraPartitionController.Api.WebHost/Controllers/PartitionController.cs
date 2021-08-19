@@ -77,7 +77,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
 
         private IEnumerable<Partition> BuildPartitions(string file)
         {
-            var partitions = new Lazy<Partition>();
+            var partitions = new List<Partition>();
             using (StreamReader streamReader = new StreamReader(file))
             {
                 string jsonString = streamReader.ReadToEnd();
