@@ -6,28 +6,34 @@ namespace LinuxHydraPartitionController.Api.WebHost
     public class Partition
     {
         public int Id { get; }
-        public string StopPath { get; }
-        public string StartPath { get; }
-        public string RestartPath { get; }
+        public Endpoint StopEndpoint { get; }
+        public Endpoint StartEndpoint { get; }
+        public Endpoint RestartEndpoint { get; }
+        public Endpoint StatusEndpoint { get; }
+        public string Status => GetStatus();
 
         private readonly ILogger<Partition> _logger;
         private readonly ProcessStartInfo _restartProcessStartInfo;
         private readonly ProcessStartInfo _startProcessStartInfo;
         private readonly ProcessStartInfo _stopProcessStartInfo;
+        private readonly ProcessStartInfo _statusProcessStartInfo;
 
         internal Partition(ILogger<Partition> logger, int id)
         {
             _logger = logger;
             Id = id;
 
-            StartPath = $"/partitions/{Id}/start";
+            StartEndpoint = new Endpoint($"/partitions/{Id}/start", "POST");
             _startProcessStartInfo = BuildProcessStartInfo("start");
 
-            StopPath = $"/partitions/{Id}/stop";
+            StopEndpoint = new Endpoint($"/partitions/{Id}/stop", "POST");
             _stopProcessStartInfo = BuildProcessStartInfo("stop");
 
-            RestartPath = $"/partitions/{Id}/restart";
+            RestartEndpoint = new Endpoint($"/partitions/{Id}/restart", "POST");
             _restartProcessStartInfo = BuildProcessStartInfo("restart");
+
+            StatusEndpoint = new Endpoint($"/partitions/{Id}", "GET");
+            _statusProcessStartInfo = BuildProcessStartInfo("status");
         }
 
         public bool IdMatches(int id)
@@ -56,16 +62,22 @@ namespace LinuxHydraPartitionController.Api.WebHost
             _logger.Log(LogLevel.Critical, $"Finished stopping partition {Id}.");
         }
 
-        private void Execute(ProcessStartInfo processStartInfo)
+        private string GetStatus()
         {
-            var proc = new Process {StartInfo = processStartInfo};
+            return Execute(_statusProcessStartInfo);
+        }
+
+
+        private string Execute(ProcessStartInfo processStartInfo)
+        {
+            var proc = new Process { StartInfo = processStartInfo };
             proc.Start();
-            var error = proc.StandardError;
-            var output = error.ReadToEnd();
-            if(output.Length > 0)
+            var errorOutput = proc.StandardError.ReadToEnd();
+            if (errorOutput.Length > 0)
             {
-                _logger.Log(LogLevel.Error, $"For partition {Id}: {output}");
+                _logger.Log(LogLevel.Error, $"For partition {Id}: {errorOutput}");
             }
+            return proc.StandardOutput.ReadToEnd();
         }
 
         private ProcessStartInfo BuildProcessStartInfo(string state)
