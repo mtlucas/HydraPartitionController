@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace LinuxHydraPartitionController.Api.WebHost
@@ -14,12 +15,11 @@ namespace LinuxHydraPartitionController.Api.WebHost
     {
         public static void Main(string[] args)
         {
-            var launchSettings = Path.Combine(Directory.GetCurrentDirectory(), "Properties", "launchSettings.json");
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config.AddJsonFile(launchSettings, optional: true, reloadOnChange: true);
+                .ConfigureWebHostDefaults(webBuilder => {
+                    webBuilder
+                        .ConfigureKestrel(serverOptions => serverOptions.Listen(IPAddress.Any, 5000))
+                        .UseStartup<Startup>();
                 })
                 .Build()
                 .Run();
