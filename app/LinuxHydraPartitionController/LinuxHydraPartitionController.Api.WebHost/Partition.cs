@@ -65,7 +65,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
         private string GetStatus()
         {
             var statusString = Execute(_statusProcessStartInfo);
-            var statusLines = statusString.Split("\\n");
+            var statusLines = statusString.Split("\n");
             if (statusLines.Length < 3)
             {
                 _logger.Log(LogLevel.Critical, $"Line count {statusLines.Length}.");
