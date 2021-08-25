@@ -68,6 +68,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var statusLines = statusString.Split("\\n");
             if (statusLines.Length < 3)
             {
+                _logger.Log(LogLevel.Critical, $"Line count {statusLines.Length}.");
                 return statusString;
             }
 
@@ -88,7 +89,8 @@ namespace LinuxHydraPartitionController.Api.WebHost
             {
                 return "Disabled";
             }
-
+            _logger.Log(LogLevel.Critical, activeLine);
+            _logger.Log(LogLevel.Critical, loadedLine);
             return statusString;
         }
 
