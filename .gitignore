@@ -30,3 +30,7 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+/.idea/
+/app/LinuxHydraPartitionController/.idea/*
+riderModule.xml
+workspace.xml
