@@ -66,32 +66,14 @@ namespace LinuxHydraPartitionController.Api.WebHost
         {
             var statusString = Execute(_statusProcessStartInfo);
             var statusLines = statusString.Split("\n");
-            if (statusLines.Length < 3)
+            if (statusLines.Length >= 3)
             {
                 _logger.Log(LogLevel.Critical, $"Line count {statusLines.Length}.");
-                return statusString;
-            }
-
-
-            var activeLine = statusLines[2].Trim();
-            if (activeLine.StartsWith("Active: active (running)"))
-            {
-                return "Running";
-            }
-
-            var loadedLine = statusLines[1].Trim();
-            if (loadedLine.Equals($"Loaded: loaded (/etc/systemd/system/gos_hpu_{Id}.service; enabled; vendor preset: disabled)"))
-            {
                 return "Stopped";
             }
-
-            if (loadedLine.Equals($"Loaded: loaded (/etc/systemd/system/gos_hpu_{Id}.service; disabled; vendor preset: disabled)"))
-            {
-                return "Disabled";
-            }
-            _logger.Log(LogLevel.Critical, activeLine);
-            _logger.Log(LogLevel.Critical, loadedLine);
-            return statusString;
+            var activeLine = statusLines[2].Trim();
+            var isRunning = activeLine.StartsWith("Active: active (running)");
+            return isRunning ? "Running" : "Stopped";
         }
 
 
