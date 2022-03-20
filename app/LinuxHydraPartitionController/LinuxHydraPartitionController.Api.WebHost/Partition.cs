@@ -66,11 +66,6 @@ namespace LinuxHydraPartitionController.Api.WebHost
         {
             var statusString = Execute(_statusProcessStartInfo);
             var statusLines = statusString.Split("\n");
-            if (statusLines.Length >= 3)
-            {
-                _logger.Log(LogLevel.Critical, $"Line count {statusLines.Length}.");
-                return "Stopped";
-            }
             var activeLine = statusLines[2].Trim();
             var isRunning = activeLine.StartsWith("Active: active (running)");
             return isRunning ? "Running" : "Stopped";
