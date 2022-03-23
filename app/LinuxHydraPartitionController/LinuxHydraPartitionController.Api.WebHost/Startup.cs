@@ -8,9 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace LinuxHydraPartitionController.Api.WebHost
 {
@@ -30,7 +30,17 @@ namespace LinuxHydraPartitionController.Api.WebHost
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LinuxHydraPartitionController.Api.WebHost", Version = "v1" });
+                c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+                {
+                    Description = "Add your ApiKey here",
+                    In = ParameterLocation.Header,
+                    Name = "ApiKey",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "ApiKeyScheme"
+                });
+                c.OperationFilter<AuthenticationRequirementsOperationFilter>();
             });
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,9 +49,11 @@ namespace LinuxHydraPartitionController.Api.WebHost
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LinuxHydraPartitionController.Api.WebHost v1"));
             }
+
+            // Enable Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LinuxHydraPartitionController.Api.WebHost v1"));
 
             //app.UseHttpsRedirection();
             app.UseRouting();
@@ -50,6 +62,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
