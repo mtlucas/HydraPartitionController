@@ -1,5 +1,13 @@
-using System.Diagnostics;
+using System;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.IO;
+using System.Diagnostics;
+using System.Linq;
+using System.Text.Json;
+using LinuxHydraPartitionController.Api.WebHost.Common;
+
 
 namespace LinuxHydraPartitionController.Api.WebHost
 {
@@ -12,6 +20,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
         public Endpoint StatusEndpoint { get; }
         public string Status => GetStatus();
 
+        public static readonly IEnumerable<Partition> _partitions;
         private readonly ILogger<Partition> _logger;
         private readonly ProcessStartInfo _restartProcessStartInfo;
         private readonly ProcessStartInfo _startProcessStartInfo;
