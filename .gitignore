@@ -339,6 +339,25 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 **/.vscode/*
+.vscode/
 
 #Ignore thumbnails created by Windows
 Thumbs.db
+
+# Generated configs
+/appSettings.json
+
+# Ignore merge artifacts and .old files
+*.orig
+*.old
+
+# Web host wwwroot experimental
+/wwwroot/scripts
+/wwwroot/fonts
+/wwwroot/css
+
+# Nuke dynamic files
+/.nuke/build.schema.json
+
+# Artifacts
+/artifacts
