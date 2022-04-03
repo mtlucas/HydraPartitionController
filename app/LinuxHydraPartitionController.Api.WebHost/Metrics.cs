@@ -29,21 +29,21 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var cpuExec = manageProcess.Execute(_metricsProcessStartInfo);
             var cpuLines = cpuExec.Split("\n");
             _logger.LogInformation($"CPU Line 0 and 3: {cpuLines[0]} {cpuLines[3]}");
-            _logger.LogInformation("CPU Line 0 Int: ", int.Parse(cpuLines[0]));
-            _metrics.CPU.Cores = int.Parse(cpuLines[0]);
-            _metrics.CPU.Load1min = float.Parse(cpuLines[1]);
-            _metrics.CPU.Load5min = float.Parse(cpuLines[2]);
-            _metrics.CPU.Load15min = float.Parse(cpuLines[3]);
+            _logger.LogInformation("CPU Line 0 Int: ", Convert.ToInt32(cpuLines[0].ToString()));
+            _metrics.CPU.Cores = Convert.ToInt32(cpuLines[0].ToString());
+            _metrics.CPU.Load1min = Convert.ToSingle(cpuLines[1].ToString());
+            _metrics.CPU.Load5min = Convert.ToSingle(cpuLines[2].ToString());
+            _metrics.CPU.Load15min = Convert.ToSingle(cpuLines[3].ToString());
             _metricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/free -m|/usr/bin/head -2|/usr/bin/tail -n +2|/usr/bin/awk '{print $2\\\"\\n\\\"$3\\\"\\n\\\"$4\\\"\\n\\\"$6\\\"\\n\\\"$7}'");
             var memlines = manageProcess.Execute(_metricsProcessStartInfo).Split("\n");
-            _metrics.MemoryInMB.Total = int.Parse(memlines[0]);
-            _metrics.MemoryInMB.Used = int.Parse(memlines[1]);
-            _metrics.MemoryInMB.Free = int.Parse(memlines[2]);
-            _metrics.MemoryInMB.Buffers = int.Parse(memlines[3]);
-            _metrics.MemoryInMB.Available = int.Parse(memlines[4]);
+            _metrics.MemoryInMB.Total = Convert.ToInt32(memlines[0].ToString());
+            _metrics.MemoryInMB.Used = Convert.ToInt32(memlines[1].ToString());
+            _metrics.MemoryInMB.Free = Convert.ToInt32(memlines[2].ToString());
+            _metrics.MemoryInMB.Buffers = Convert.ToInt32(memlines[3].ToString());
+            _metrics.MemoryInMB.Available = Convert.ToInt32(memlines[4].ToString());
             _metricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/cat /proc/uptime|/usr/bin/awk '{print int($1)}'");
             var uptimeLines = manageProcess.Execute(_metricsProcessStartInfo).Split("\n");
-            _metrics.UptimeInSeconds.Uptime = int.Parse(uptimeLines[0]);
+            _metrics.UptimeInSeconds.Uptime = Convert.ToInt32(uptimeLines[0].ToString());
             return _metrics;
         }
     }
