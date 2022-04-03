@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
-using LinuxHydraPartitionController.Api.WebHost.Common;
+using LinuxHydraPartitionController.Api.WebHost.Models;
 using LinuxHydraPartitionController.Api.WebHost.Attributes;
 
 namespace LinuxHydraPartitionController.Api.WebHost.Controllers

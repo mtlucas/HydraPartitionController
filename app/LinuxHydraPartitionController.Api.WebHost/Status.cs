@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -8,67 +8,30 @@ using System.Linq;
 using System.Text.Json;
 using LinuxHydraPartitionController.Api.WebHost.Models;
 
-
 namespace LinuxHydraPartitionController.Api.WebHost
 {
-    public class Partition
+    public class Status
     {
         public int Id { get; }
-        public Endpoint StopEndpoint { get; }
-        public Endpoint StartEndpoint { get; }
-        public Endpoint RestartEndpoint { get; }
         public Endpoint StatusEndpoint { get; }
         public string ServiceStatus => GetStatus();
 
-        public static readonly IEnumerable<Partition> _partitions;
-        private readonly ILogger<Partition> _logger;
-        private readonly ProcessStartInfo _restartProcessStartInfo;
-        private readonly ProcessStartInfo _startProcessStartInfo;
-        private readonly ProcessStartInfo _stopProcessStartInfo;
+        public static readonly IEnumerable<Status> _partitions;
+        private readonly ILogger<Status> _logger;
         private readonly ProcessStartInfo _statusProcessStartInfo;
 
-        internal Partition(ILogger<Partition> logger, int id)
+        internal Status(ILogger<Status> logger, int id)
         {
             _logger = logger;
             Id = id;
 
-            StartEndpoint = new Endpoint($"/partitions/{Id}/start", "POST");
-            _startProcessStartInfo = BuildProcessStartInfo("start");
-
-            StopEndpoint = new Endpoint($"/partitions/{Id}/stop", "POST");
-            _stopProcessStartInfo = BuildProcessStartInfo("stop");
-
-            RestartEndpoint = new Endpoint($"/partitions/{Id}/restart", "POST");
-            _restartProcessStartInfo = BuildProcessStartInfo("restart");
-
-            StatusEndpoint = new Endpoint($"/partitions/{Id}", "GET");
+            StatusEndpoint = new Endpoint($"/partition/{Id}", "GET");
             _statusProcessStartInfo = BuildProcessStartInfo("status");
         }
 
         public bool IdMatches(int id)
         {
             return Id.Equals(id);
-        }
-
-        public void Restart()
-        {
-            _logger.Log(LogLevel.Critical, $"Restarting partition {Id}.");
-            Execute(_restartProcessStartInfo);
-            _logger.Log(LogLevel.Critical, $"Finished restarting partition {Id}.");
-        }
-
-        public void Start()
-        {
-            _logger.Log(LogLevel.Critical, $"Starting partition {Id}.");
-            Execute(_startProcessStartInfo);
-            _logger.Log(LogLevel.Critical, $"Finished starting partition {Id}.");
-        }
-
-        public void Stop()
-        {
-            _logger.Log(LogLevel.Critical, $"Stopping partition {Id}.");
-            Execute(_stopProcessStartInfo);
-            _logger.Log(LogLevel.Critical, $"Finished stopping partition {Id}.");
         }
 
         private string GetStatus()
@@ -79,7 +42,6 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var isRunning = activeLine.StartsWith("Active: active (running)");
             return isRunning ? "Running" : "Stopped";
         }
-
 
         private string Execute(ProcessStartInfo processStartInfo)
         {

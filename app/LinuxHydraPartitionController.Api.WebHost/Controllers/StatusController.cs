@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
-using LinuxHydraPartitionController.Api.WebHost.Common;
+using LinuxHydraPartitionController.Api.WebHost.Models;
 
 namespace LinuxHydraPartitionController.Api.WebHost.Controllers
 {
@@ -17,10 +17,10 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
     [Route("status")]
     public class StatusController : ControllerBase
     {
-        private readonly ILogger<Partition> _logger;
-        private readonly IEnumerable<Partition> _partitions;
+        private readonly ILogger<Status> _logger;
+        private readonly IEnumerable<Status> _partitions;
 
-        public StatusController(ILogger<Partition> logger, IConfiguration configuration)
+        public StatusController(ILogger<Status> logger, IConfiguration configuration)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             if (configuration is null)
@@ -33,7 +33,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         [HttpGet("")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IEnumerable<Partition> Get()
+        public IEnumerable<Status> Get()
         {
             return _partitions;
         }
@@ -41,19 +41,20 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         [HttpGet("{id:int}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public Partition Get([FromRoute] int id)
+        public Status Get([FromRoute] int id)
         {
             return GetPartitionById(id);
         }
-        private Partition GetPartitionById(int id)
+        
+        private Status GetPartitionById(int id)
         {
             return _partitions.ToArray().Single(partition => partition.IdMatches(id));
         }
 
-        private IEnumerable<Partition> BuildPartitions(IConfiguration configuration)
+        private IEnumerable<Status> BuildPartitions(IConfiguration configuration)
         {
             String gosFilePath = configuration.GetSection("GosConfigPath").Get<String>();
-            var partitions = new List<Partition>();
+            var partitions = new List<Status>();
             using (StreamReader streamReader = new StreamReader(gosFilePath))
             {
                 var jsonString = streamReader.ReadToEnd();
@@ -62,7 +63,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
                 {
                     machineConfig.partitions.ForEach(partitionConfig =>
                     {
-                        var partition = new Partition(_logger, partitionConfig.partition);
+                        var partition = new Status(_logger, partitionConfig.partition);
                         partitions.Add(partition);
                     });
                 });
