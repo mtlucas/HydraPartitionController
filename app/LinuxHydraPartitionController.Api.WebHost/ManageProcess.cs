@@ -12,9 +12,9 @@ namespace LinuxHydraPartitionController.Api.WebHost
     // This class has Methods to build and execute linux processes
     public class ManageProcess
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<Metrics> _logger;
 
-        public ManageProcess(ILogger logger)
+        public ManageProcess(ILogger<Metrics> logger)
         {
             _logger = logger;
         }
@@ -29,7 +29,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
                 _logger.Log(LogLevel.Error, $"ERROR: Execute CMD failed --> {errorOutput}");
             }
             var standardOutput = proc.StandardOutput.ReadToEnd();
-            _logger.Log(LogLevel.Information, $"CMD OUTPUT: {standardOutput}");
+            _logger.Log(LogLevel.Information, $"CMD OUTPUT:\n{standardOutput}");
             return standardOutput;
         }
 

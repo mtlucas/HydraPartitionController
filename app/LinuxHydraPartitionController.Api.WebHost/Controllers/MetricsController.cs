@@ -37,7 +37,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             }
             catch (Exception ex)
             {
-                _logger.Log(LogLevel.Error, $"ERROR: GetMetrics method failed --> {ex.Message} ==> {ex.InnerException}");
+                _logger.Log(LogLevel.Error, $"ERROR: GetMetrics method failed --> {ex.Message} ==> {ex.StackTrace} ==> {ex.TargetSite}");
                 return StatusCode(500, "Internal server error");
             }
         }
