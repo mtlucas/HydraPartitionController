@@ -25,7 +25,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
         public MachineMetrics GetMetrics()
         {
             var manageProcess = new ManageProcess(_logger);
-            MachineMetrics _metrics = new();
+            MachineMetrics _metrics = new MachineMetrics();
             ProcessStartInfo _metricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/nproc;/usr/bin/cat /proc/loadavg|/usr/bin/awk '{print $1\\\"\\n\\\"$2\\\"\\n\\\"$3}'");
             var cpuLines = manageProcess.Execute(_metricsProcessStartInfo).Split("\n");
             _metrics.CPU.Cores = int.Parse(cpuLines[0]);
