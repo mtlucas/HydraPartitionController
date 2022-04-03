@@ -26,12 +26,14 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var manageProcess = new ManageProcess(_logger);
             MachineMetrics _metrics = new MachineMetrics();
             ProcessStartInfo _metricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/nproc;/usr/bin/cat /proc/loadavg|/usr/bin/awk '{print $1\\\"\\n\\\"$2\\\"\\n\\\"$3}'");
-            var cpuLines = manageProcess.Execute(_metricsProcessStartInfo).Split("\n");
+            var cpuExec = manageProcess.Execute(_metricsProcessStartInfo);
+            var cpuLines = cpuExec.Split("\n");
+            _logger.LogInformation($"CPU Line 0 and 3: {cpuLines[0]} {cpuLines[3]}");
+            _logger.LogInformation("CPU Line 0 Int: ", int.Parse(cpuLines[0]));
             _metrics.CPU.Cores = int.Parse(cpuLines[0]);
             _metrics.CPU.Load1min = float.Parse(cpuLines[1]);
             _metrics.CPU.Load5min = float.Parse(cpuLines[2]);
             _metrics.CPU.Load15min = float.Parse(cpuLines[3]);
-            _logger.LogInformation($"CPU Line 0 and 3: {cpuLines[0]} {cpuLines[3]}");
             _metricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/free -m|/usr/bin/head -2|/usr/bin/tail -n +2|/usr/bin/awk '{print $2\\\"\\n\\\"$3\\\"\\n\\\"$4\\\"\\n\\\"$6\\\"\\n\\\"$7}'");
             var memlines = manageProcess.Execute(_metricsProcessStartInfo).Split("\n");
             _metrics.MemoryInMB.Total = int.Parse(memlines[0]);
