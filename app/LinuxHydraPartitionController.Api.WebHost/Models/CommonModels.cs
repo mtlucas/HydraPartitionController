@@ -7,11 +7,11 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
     // GosConfig.json data models
     public class GosConfig
     {
-        public List<MachineConfig> machines { get; set; }
+        public List<MachineConfig>? machines { get; set; }
     }
     public class MachineConfig
     {
-        public List<PartitionConfig> partitions { get; set; }
+        public List<PartitionConfig>? partitions { get; set; }
     }
     public class PartitionConfig
     {
@@ -34,27 +34,27 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
     // Machine Metrics data models
     public class MachineMetrics
     {
-        public CPU CPU { get; set; }
-        public MemoryInMB MemoryInMB { get; set; }
-        public UptimeInSeconds UptimeInSeconds { get; set; }
+        public CPU? CPU { get; set; }
+        public MemoryInMB? MemoryInMB { get; set; }
+        public UptimeInSeconds? UptimeInSeconds { get; set; }
     }
     public class CPU
     {
-        public int Cores { get; set; }
-        public float Load1min { get; set; }
-        public float Load5min { get; set; }
-        public float Load15min { get; set; }
+        public int Cores { get; set; } = 0;
+        public float Load1min { get; set; } = 0;
+        public float Load5min { get; set; } = 0;
+        public float Load15min { get; set; } = 0;
     }
     public class MemoryInMB
     {
-        public int Total { get; set; }
-        public int Used { get; set; }
-        public int Free { get; set; }
-        public int Buffers { get; set; }
-        public int Available { get; set; }
+        public int Total { get; set; } = 0;
+        public int Used { get; set; } = 0;
+        public int Free { get; set; } = 0;
+        public int Buffers { get; set; } = 0;
+        public int Available { get; set; } = 0;
     }
     public class UptimeInSeconds
     {
-        public int Uptime { get; set; }
+        public int Uptime { get; set; } = 0;
     }
 }
