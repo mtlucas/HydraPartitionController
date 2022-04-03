@@ -33,6 +33,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             return standardOutput;
         }
 
+        // Must double escape CMD arguments due to double string interpolation (C# and bash)
         public ProcessStartInfo BuildProcessStartInfo(string cmd)
         {
             _logger.Log(LogLevel.Information, $"CMD: {cmd}");
