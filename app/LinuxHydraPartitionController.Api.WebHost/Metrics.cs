@@ -16,7 +16,6 @@ namespace LinuxHydraPartitionController.Api.WebHost
     public class Metrics
     {
         private readonly ILogger<Metrics> _logger;
-        //private static ProcessStartInfo _metricsProcessStartInfo;
 
         public Metrics(ILogger<Metrics> logger)
         {

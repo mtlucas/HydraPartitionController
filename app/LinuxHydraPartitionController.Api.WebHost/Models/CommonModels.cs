@@ -44,13 +44,6 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
         public float Load1min { get; set; }
         public float Load5min { get; set; }
         public float Load15min { get; set; }
-        internal CPU(int cores, float load1min, float load5min, float load15min)
-        {
-            Cores = cores;
-            Load1min = load1min;
-            Load5min = load5min;
-            Load15min = load15min;
-        }
     }
     public class MemoryInMB
     {
@@ -59,21 +52,9 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
         public int Free { get; set; }
         public int Buffers { get; set; }
         public int Available { get; set; }
-        internal MemoryInMB(int total, int used, int free, int buffers, int available)
-        {
-            Total = total;
-            Used = used;
-            Free = free;
-            Buffers = buffers;
-            Available = available;
-        }
     }
     public class UptimeInSeconds
     {
         public int Uptime { get; set; }
-        internal UptimeInSeconds(int uptime)
-        {
-            Uptime = uptime;
-        }
     }
 }

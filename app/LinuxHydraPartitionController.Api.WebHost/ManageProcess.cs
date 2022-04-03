@@ -12,9 +12,9 @@ namespace LinuxHydraPartitionController.Api.WebHost
     // This class has Methods to build and execute linux processes
     public class ManageProcess
     {
-        private readonly ILogger<Metrics> _logger;
+        private readonly ILogger _logger;
 
-        public ManageProcess(ILogger<Metrics> logger)
+        public ManageProcess(ILogger logger)
         {
             _logger = logger;
         }
