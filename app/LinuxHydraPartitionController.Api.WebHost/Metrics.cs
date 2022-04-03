@@ -29,8 +29,9 @@ namespace LinuxHydraPartitionController.Api.WebHost
             ProcessStartInfo machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/nproc;/usr/bin/cat /proc/loadavg|/usr/bin/awk '{print $1\\\"\\n\\\"$2\\\"\\n\\\"$3}'");
             var cpuLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
             _logger.LogInformation($"CPU Line 0 and 3: {cpuLines[0]} {cpuLines[3]}");
-            _logger.LogInformation("CPU Line 0 Int: ", Convert.ToInt32(cpuLines[0].ToString()));
-            machineMetrics.CPU.Cores = Convert.ToInt32(cpuLines[0].ToString());
+            int temp = Convert.ToInt32(cpuLines[0].ToString());
+            _logger.LogInformation($"CPU Line 0 Int: {temp}");
+            machineMetrics.CPU.Cores.Equals(temp);
             machineMetrics.CPU.Load1min = Convert.ToSingle(cpuLines[1].ToString());
             machineMetrics.CPU.Load5min = Convert.ToSingle(cpuLines[2].ToString());
             machineMetrics.CPU.Load15min = Convert.ToSingle(cpuLines[3].ToString());
