@@ -30,7 +30,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
         {
             var manageProcess = new ManageProcess(_logger);
             ProcessStartInfo machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/nproc;/usr/bin/cat /proc/loadavg|/usr/bin/awk '{print $1\\\"\\n\\\"$2\\\"\\n\\\"$3}'");
-            string[] cpuLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
+            var cpuLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
             if (cpuLines.Length == 4)
             {
                 cPU.Cores = Convert.ToInt32(cpuLines[0].ToString());
@@ -43,7 +43,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
                 _logger.Log(LogLevel.Warning, $"WARNING: CPU Metrics cmd results failed --> Output: {cpuLines}");
             }
             machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/free -m|/usr/bin/head -2|/usr/bin/tail -n +2|/usr/bin/awk '{print $2\\\"\\n\\\"$3\\\"\\n\\\"$4\\\"\\n\\\"$6\\\"\\n\\\"$7}'");
-            string[] memLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
+            var memLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
             if (memLines.Length == 5)
             {
                 memoryInMB.Total = Convert.ToInt32(memLines[0].ToString());
@@ -57,7 +57,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
                 _logger.Log(LogLevel.Warning, $"WARNING: Memory Metrics cmd results failed --> Output: {memLines}");
             }
             machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/cat /proc/uptime|/usr/bin/awk '{print int($1)}'");
-            string[] uptimeLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
+            var uptimeLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
             if (uptimeLines.Length == 1)
             {
                 uptimeInSeconds.Uptime = Convert.ToInt32(uptimeLines[0].ToString());
