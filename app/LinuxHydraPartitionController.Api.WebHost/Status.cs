@@ -25,7 +25,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             _logger = logger;
             Id = id;
 
-            StatusEndpoint = new Endpoint($"/partition/{Id}", "GET");
+            StatusEndpoint = new Endpoint($"/partitions/{Id}", "GET");
             _statusProcessStartInfo = BuildProcessStartInfo("status");
         }
 
