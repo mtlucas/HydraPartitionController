@@ -23,10 +23,12 @@ namespace LinuxHydraPartitionController.Api.WebHost
         {
             var proc = new Process { StartInfo = processStartInfo };
             proc.Start();
+            while (!proc.WaitForExit(1000));
             var errorOutput = proc.StandardError.ReadToEnd();
-            if (errorOutput.Length > 0)
+            if (errorOutput.Length > 0 || proc.ExitCode > 0)
             {
-                _logger.Log(LogLevel.Error, $"ERROR: Execute CMD failed --> {errorOutput}");
+                //_logger.Log(LogLevel.Error, $"ERROR: Execute CMD failed --> Exit code: {proc.ExitCode} --> {errorOutput}");
+                return "WARNING: Execute CMD failed --> Exit code: " + proc.ExitCode + " --> " + errorOutput;
             }
             var standardOutput = proc.StandardOutput.ReadToEnd();
             //_logger.Log(LogLevel.Information, $"CMD OUTPUT:\n{standardOutput}");
