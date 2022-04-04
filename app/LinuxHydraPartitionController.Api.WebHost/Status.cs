@@ -19,14 +19,15 @@ namespace LinuxHydraPartitionController.Api.WebHost
         public static readonly IEnumerable<Status> _partitions;
         private readonly ILogger<Status> _logger;
         private readonly ProcessStartInfo _statusProcessStartInfo;
-
+        
         internal Status(ILogger<Status> logger, int id)
         {
             _logger = logger;
             Id = id;
 
+            var manageProcess = new ManageProcess(_logger);
             StatusEndpoint = new Endpoint($"/partitions/{Id}", "GET");
-            _statusProcessStartInfo = BuildProcessStartInfo("status");
+            _statusProcessStartInfo = manageProcess.BuildProcessStartInfo($"/usr/bin/sudo /usr/bin/systemctl status gos_hpu_{Id}.service");
         }
 
         public bool IdMatches(int id)
@@ -36,35 +37,20 @@ namespace LinuxHydraPartitionController.Api.WebHost
 
         private string GetStatus()
         {
-            var statusString = Execute(_statusProcessStartInfo);
+            var manageProcess = new ManageProcess(_logger);
+            var statusString = manageProcess.Execute(_statusProcessStartInfo);
             var statusLines = statusString.Split("\n");
-            var activeLine = statusLines[2].Trim();
-            var isRunning = activeLine.StartsWith("Active: active (running)");
-            return isRunning ? "Running" : "Stopped";
-        }
-
-        private string Execute(ProcessStartInfo processStartInfo)
-        {
-            var proc = new Process { StartInfo = processStartInfo };
-            proc.Start();
-            var errorOutput = proc.StandardError.ReadToEnd();
-            if (errorOutput.Length > 0)
+            if (statusLines[0].StartsWith("WARNING"))
             {
-                _logger.Log(LogLevel.Error, $"ERROR: For partition {Id} --> {errorOutput}");
+                _logger.Log(LogLevel.Warning, $"WARNING: Status cmd results failed --> Output: {statusLines[0]}");
+                return "Error";
             }
-            return proc.StandardOutput.ReadToEnd();
-        }
-
-        private ProcessStartInfo BuildProcessStartInfo(string state)
-        {
-            return new ProcessStartInfo
+            else
             {
-                FileName = "/usr/bin/bash",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                Arguments = $"-c \"/usr/bin/sudo /usr/bin/systemctl {state} gos_hpu_{Id}.service\""
-            };
+                var activeLine = statusLines[2].Trim();
+                var isRunning = activeLine.StartsWith("Active: active (running)");
+                return isRunning ? "Running" : "Stopped";
+            }
         }
     }
 }
