@@ -7,11 +7,11 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
     // GosConfig.json data models
     public class GosConfig
     {
-        public List<MachineConfig>? machines { get; set; }
+        public List<MachineConfig> machines { get; set; }
     }
     public class MachineConfig
     {
-        public List<PartitionConfig>? partitions { get; set; }
+        public List<PartitionConfig> partitions { get; set; }
     }
     public class PartitionConfig
     {
@@ -34,9 +34,9 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
     // Machine Metrics data models
     public class MachineMetrics
     {
-        public CPU? CPU { get; set; }
-        public MemoryInMB? MemoryInMB { get; set; }
-        public UptimeInSeconds? UptimeInSeconds { get; set; }
+        public CPU CPU { get; set; }
+        public MemoryInMB MemoryInMB { get; set; }
+        public UptimeInSeconds UptimeInSeconds { get; set; }
     }
     public class CPU
     {
