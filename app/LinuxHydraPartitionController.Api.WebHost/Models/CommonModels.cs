@@ -34,9 +34,9 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
     // Machine Metrics data models
     public class MachineMetrics
     {
-        public CPU CPU { get; set; }
-        public MemoryInMB MemoryInMB { get; set; }
-        public UptimeInSeconds UptimeInSeconds { get; set; }
+        public CPU CPU { get; set; } = null!;
+        public MemoryInMB MemoryInMB { get; set; } = null!;
+        public UptimeInSeconds UptimeInSeconds { get; set; } = null!;
     }
     public class CPU
     {
