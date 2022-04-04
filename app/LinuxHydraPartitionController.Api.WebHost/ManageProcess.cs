@@ -29,14 +29,14 @@ namespace LinuxHydraPartitionController.Api.WebHost
                 _logger.Log(LogLevel.Error, $"ERROR: Execute CMD failed --> {errorOutput}");
             }
             var standardOutput = proc.StandardOutput.ReadToEnd();
-            _logger.Log(LogLevel.Information, $"CMD OUTPUT:\n{standardOutput}");
+            //_logger.Log(LogLevel.Information, $"CMD OUTPUT:\n{standardOutput}");
             return standardOutput;
         }
 
         // Must double escape CMD arguments due to double string interpolation (C# and bash)
         public ProcessStartInfo BuildProcessStartInfo(string cmd)
         {
-            _logger.Log(LogLevel.Information, $"CMD: {cmd}");
+            //_logger.Log(LogLevel.Information, $"CMD: {cmd}");
             return new ProcessStartInfo
             {
                 FileName = "/usr/bin/bash",

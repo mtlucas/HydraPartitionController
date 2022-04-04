@@ -30,11 +30,11 @@ namespace LinuxHydraPartitionController.Api.WebHost
         public IActionResult Get()
         {
             var metrics = new Metrics(_logger);
-            var myMetrics = new MachineMetrics();
+            MachineMetrics machineMetrics = new MachineMetrics();
             try
             {
-                myMetrics = metrics.GetMetrics();
-                return new JsonResult(myMetrics);
+                machineMetrics = metrics.GetMetrics();
+                return new JsonResult(machineMetrics);
             }
             catch (Exception ex)
             {
