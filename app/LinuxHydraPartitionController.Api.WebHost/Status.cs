@@ -39,7 +39,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
         private string GetStatus()
         {
             var manageProcess = new ManageProcess(_logger);
-            var statusString = manageProcess.Execute(_statusProcessStartInfo);
+            var statusString = manageProcess.Execute(_statusProcessStartInfo, "0,3");
             var statusLines = statusString.Split("\n");
             if (statusLines[0].StartsWith("WARNING"))
             {

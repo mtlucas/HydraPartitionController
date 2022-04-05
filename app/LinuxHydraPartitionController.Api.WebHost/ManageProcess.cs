@@ -19,13 +19,15 @@ namespace LinuxHydraPartitionController.Api.WebHost
             _logger = logger;
         }
 
-        public string Execute(ProcessStartInfo processStartInfo)
+        // OPTIONAL: Add string of comma separated valid exit codes, any others will be considered a WARNING or ERROR.
+        public string Execute(ProcessStartInfo processStartInfo, string validCodeString = "0")
         {
             var proc = new Process { StartInfo = processStartInfo };
+            int[] validCodes = validCodeString.Split(',').Select(s => int.TryParse(s, out int n) ? n : 0).ToArray();
             proc.Start();
             while (!proc.WaitForExit(1000));
             var errorOutput = proc.StandardError.ReadToEnd();
-            if (errorOutput.Length > 0 || proc.ExitCode > 0)
+            if (errorOutput.Length > 0 || !validCodes.Contains(proc.ExitCode))
             {
                 _logger.Log(LogLevel.Warning, $"WARNING: Execute CMD failed --> Exit code: {proc.ExitCode} --> {errorOutput}");
                 return "WARNING: Execute CMD failed --> Exit code: " + proc.ExitCode + " --> " + errorOutput;
