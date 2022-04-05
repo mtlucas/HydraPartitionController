@@ -16,9 +16,9 @@ namespace LinuxHydraPartitionController.Api.WebHost
     public class Metrics
     {
         private MachineMetrics machineMetrics = new MachineMetrics();
-        private CPU cPU = new CPU();
-        private MemoryInMB memoryInMB = new MemoryInMB();
-        private UptimeInSeconds uptimeInSeconds = new UptimeInSeconds();
+        private CPU cpu { get; set; }
+        private MemoryInMB memory { get; set; }
+        private UptimeInSeconds uptime { get; set; }
 
         private readonly ILogger<Metrics> _logger;
 
@@ -37,10 +37,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             }
             else
             {
-                cPU.Cores = Convert.ToInt32(cpuLines[0].ToString());
-                cPU.Load1min = Convert.ToSingle(cpuLines[1].ToString());
-                cPU.Load5min = Convert.ToSingle(cpuLines[2].ToString());
-                cPU.Load15min = Convert.ToSingle(cpuLines[3].ToString());
+                cpu = new CPU(cpuLines);
             }
             machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/free -m|/usr/bin/head -2|/usr/bin/tail -n +2|/usr/bin/awk '{print $2\\\"\\n\\\"$3\\\"\\n\\\"$4\\\"\\n\\\"$6\\\"\\n\\\"$7}'");
             var memLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
@@ -50,11 +47,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             }
             else
             {
-                memoryInMB.Total = Convert.ToInt32(memLines[0].ToString());
-                memoryInMB.Used = Convert.ToInt32(memLines[1].ToString());
-                memoryInMB.Free = Convert.ToInt32(memLines[2].ToString());
-                memoryInMB.Buffers = Convert.ToInt32(memLines[3].ToString());
-                memoryInMB.Available = Convert.ToInt32(memLines[4].ToString());
+                memory = new MemoryInMB(memLines);
             }
             machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/cat /proc/uptime|/usr/bin/awk '{print int($1)}'");
             var uptimeLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
@@ -63,11 +56,11 @@ namespace LinuxHydraPartitionController.Api.WebHost
                 _logger.Log(LogLevel.Warning, $"WARNING: Uptime Metrics cmd results failed,  --> Output: {uptimeLines[0]}");
             }
             {
-                uptimeInSeconds.Uptime = Convert.ToInt32(uptimeLines[0].ToString());
+                uptime = new UptimeInSeconds(uptimeLines);
             }
-            machineMetrics.CPU = cPU;
-            machineMetrics.MemoryInMB = memoryInMB;
-            machineMetrics.UptimeInSeconds = uptimeInSeconds;
+            machineMetrics.CPU = cpu;
+            machineMetrics.MemoryInMB = memory;
+            machineMetrics.UptimeInSeconds = uptime;
             return machineMetrics;
         }
     }

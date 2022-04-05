@@ -32,17 +32,20 @@ namespace LinuxHydraPartitionController.Api.WebHost
             _logger = logger;
             Id = id;
 
+            var manageProcess = new ManageProcess(_logger);
+            const string systemctl = "/usr/bin/sudo /usr/bin/systemctl ";
+
             StartEndpoint = new Endpoint($"/partitions/{Id}/start", "POST");
-            _startProcessStartInfo = BuildProcessStartInfo("start");
+            _startProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"start gos_hpu_{Id}.service");
 
             StopEndpoint = new Endpoint($"/partitions/{Id}/stop", "POST");
-            _stopProcessStartInfo = BuildProcessStartInfo("stop");
+            _stopProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"stop gos_hpu_{Id}.service");
 
             RestartEndpoint = new Endpoint($"/partitions/{Id}/restart", "POST");
-            _restartProcessStartInfo = BuildProcessStartInfo("restart");
+            _restartProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"restart gos_hpu_{Id}.service");
 
             StatusEndpoint = new Endpoint($"/partitions/{Id}", "GET");
-            _statusProcessStartInfo = BuildProcessStartInfo("status");
+            _statusProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"status gos_hpu_{Id}.service");
         }
 
         public bool IdMatches(int id)
@@ -52,57 +55,44 @@ namespace LinuxHydraPartitionController.Api.WebHost
 
         public void Restart()
         {
+            var manageProcess = new ManageProcess(_logger);
             _logger.Log(LogLevel.Critical, $"Restarting partition {Id}.");
-            Execute(_restartProcessStartInfo);
+            manageProcess.Execute(_restartProcessStartInfo);
             _logger.Log(LogLevel.Critical, $"Finished restarting partition {Id}.");
         }
 
         public void Start()
         {
+            var manageProcess = new ManageProcess(_logger);
             _logger.Log(LogLevel.Critical, $"Starting partition {Id}.");
-            Execute(_startProcessStartInfo);
+            manageProcess.Execute(_startProcessStartInfo);
             _logger.Log(LogLevel.Critical, $"Finished starting partition {Id}.");
         }
 
         public void Stop()
         {
+            var manageProcess = new ManageProcess(_logger);
             _logger.Log(LogLevel.Critical, $"Stopping partition {Id}.");
-            Execute(_stopProcessStartInfo);
+            manageProcess.Execute(_stopProcessStartInfo);
             _logger.Log(LogLevel.Critical, $"Finished stopping partition {Id}.");
         }
 
         private string GetStatus()
         {
-            var statusString = Execute(_statusProcessStartInfo);
+            var manageProcess = new ManageProcess(_logger);
+            var statusString = manageProcess.Execute(_statusProcessStartInfo);
             var statusLines = statusString.Split("\n");
-            var activeLine = statusLines[2].Trim();
-            var isRunning = activeLine.StartsWith("Active: active (running)");
-            return isRunning ? "Running" : "Stopped";
-        }
-
-
-        private string Execute(ProcessStartInfo processStartInfo)
-        {
-            var proc = new Process { StartInfo = processStartInfo };
-            proc.Start();
-            var errorOutput = proc.StandardError.ReadToEnd();
-            if (errorOutput.Length > 0)
+            if (statusLines[0].StartsWith("WARNING"))
             {
-                _logger.Log(LogLevel.Error, $"ERROR: For partition {Id} --> {errorOutput}");
+                _logger.Log(LogLevel.Warning, $"{statusLines[0]}");
+                return "Error";
             }
-            return proc.StandardOutput.ReadToEnd();
-        }
-
-        private ProcessStartInfo BuildProcessStartInfo(string state)
-        {
-            return new ProcessStartInfo
+            else
             {
-                FileName = "/usr/bin/bash",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                Arguments = $"-c \"/usr/bin/sudo /usr/bin/systemctl {state} gos_hpu_{Id}.service\""
-            };
+                var activeLine = statusLines[2].Trim();
+                var isRunning = activeLine.StartsWith("Active: active (running)");
+                return isRunning ? "Running" : "Stopped";
+            }
         }
     }
 }

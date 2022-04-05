@@ -27,7 +27,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var errorOutput = proc.StandardError.ReadToEnd();
             if (errorOutput.Length > 0 || proc.ExitCode > 0)
             {
-                //_logger.Log(LogLevel.Error, $"ERROR: Execute CMD failed --> Exit code: {proc.ExitCode} --> {errorOutput}");
+                _logger.Log(LogLevel.Warning, $"WARNING: Execute CMD failed --> Exit code: {proc.ExitCode} --> {errorOutput}");
                 return "WARNING: Execute CMD failed --> Exit code: " + proc.ExitCode + " --> " + errorOutput;
             }
             var standardOutput = proc.StandardOutput.ReadToEnd();

@@ -26,6 +26,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             Id = id;
 
             var manageProcess = new ManageProcess(_logger);
+
             StatusEndpoint = new Endpoint($"/partitions/{Id}", "GET");
             _statusProcessStartInfo = manageProcess.BuildProcessStartInfo($"/usr/bin/sudo /usr/bin/systemctl status gos_hpu_{Id}.service");
         }
@@ -42,7 +43,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var statusLines = statusString.Split("\n");
             if (statusLines[0].StartsWith("WARNING"))
             {
-                _logger.Log(LogLevel.Warning, $"WARNING: Status cmd results failed --> Output: {statusLines[0]}");
+                _logger.Log(LogLevel.Warning, $"{statusLines[0]}");
                 return "Error";
             }
             else
