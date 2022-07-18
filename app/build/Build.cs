@@ -32,10 +32,10 @@ class Build : NukeBuild
     [Parameter("Nuspec Filename")] readonly string NuspecFile = "deploy.nuspec"; //default
     [Parameter("App build version")] readonly string BuildVersion; //Must specify
     [Parameter("Project Description")] readonly string ProjectDescription = "LinuxHydraPartitionController Nuget Package built on " + DateTime.UtcNow.ToString("MM-dd-yyyy"); //default
-    [Parameter("Project Author")] readonly string ProjectAuthor = "Pharmacy OneSource"; //default
-    [Parameter("Project Copyright")] readonly string ProjectCopyright = "Copyright 2022 Pharmacy OneSource"; //default
-    [Parameter("Project VCS Url")] readonly string ProjectUrl = "https://dev-gitlab.dev.rph.int/rollout/linux-hydra-partition-controller"; //default
-    [Parameter("NuGet repository server Url")] readonly string NugetApiUrl = "https://nuget01.dev.rph.int/nuget/Teamcity/"; //default
+    [Parameter("Project Author")] readonly string ProjectAuthor = "Michael Lucas (mike@lucasnet.org)"; //default
+    [Parameter("Project Copyright")] readonly string ProjectCopyright = "Copyright 2022"; //default
+    [Parameter("Project VCS Url")] readonly string ProjectUrl = "https://github.com/mtlucas/Hydra_partition_controller"; //default
+    [Parameter("NuGet repository server Url")] readonly string NugetApiUrl = "https://nuget.lucasnet.int"; //default
     [Parameter("Nuget repository server ApiKey")] readonly string NugetApiKey;
     [Parameter("Publishes .NET runtime with app")] readonly Boolean SelfContained = true;
 
