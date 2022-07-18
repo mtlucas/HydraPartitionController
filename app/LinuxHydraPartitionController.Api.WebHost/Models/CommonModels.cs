@@ -12,6 +12,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
     }
     public class MachineConfig
     {
+        public string machineName { get; set; }
         public List<PartitionConfig> partitions { get; set; }
     }
     public class PartitionConfig
@@ -79,5 +80,11 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
         {
             Uptime = Convert.ToInt32(uptimeLines[0].ToString());
         }
+    }
+    public class LogFileProps
+    {
+        public string logfileName { get; set; }
+        public long logfileUnixTime { get; set; }
+        public long logfileSize { get; set; }
     }
 }
