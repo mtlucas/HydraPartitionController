@@ -12,6 +12,6 @@
     <language>en-US</language>
   </metadata>
   <files>
-    <file src="artifacts\output\**" exclude="**\appsettings.json;**\appsettings.Development.json;" />
+    <file src="..\artifacts\output\**" exclude="**\appsettings.json;**\appsettings.Development.json;" />
   </files>
 </package>
