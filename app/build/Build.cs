@@ -114,7 +114,7 @@ class Build : NukeBuild
                 .Where(x => !x.EndsWith("symbols.nupkg"))
                 .ForEach(x =>
                 {
-                    NuGetTasks.NuGetPush(s => s
+                    DotNetTasks.DotNetNuGetPush(s => s
                         .SetTargetPath(x)
                         .SetSource(NugetApiUrl)
                         .SetApiKey(NugetApiKey)
