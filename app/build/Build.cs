@@ -92,15 +92,12 @@ class Build : NukeBuild
         .DependsOn(Publish)
         .Executes(() =>
         {
-            NuGetTasks.NuGetPack(s => s
+            DotNetTasks.DotNetPack(s => s
+                .SetProject(Solution)
                 .SetConfiguration(Configuration)
-                .SetTargetPath(RootDirectory / NuspecFile)
-                .SetIncludeReferencedProjects(true)
+                .EnableNoBuild()
+                .EnableNoRestore()
                 .SetVersion(BuildVersion)
-                .SetProperty("description", ProjectDescription)
-                .SetProperty("copyright", ProjectCopyright)
-                .SetProperty("authors", ProjectAuthor)
-                .SetProperty("projectUrl", ProjectUrl)
                 .SetOutputDirectory(ArtifactsDirectory / "nuget"));
         });
 
