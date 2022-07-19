@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>LinuxHydraPartitionController</id>
+    <title>Linux Hydra Partition Controller</title>
+    <version>$version$</version>
+    <authors>Michael Lucas (mike@lucasnet.org)</authors>
+    <copyright>Copyright 2022</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>WebApi for managing Hydra partitions on Linux</description>
+    <projectUrl>https://github.com/mtlucas/Hydra_partition_controller</projectUrl>
+    <language>en-US</language>
+  </metadata>
+  <files>
+    <file src="artifacts\output\**" exclude="**\appsettings.json;**\appsettings.Development.json;" />
+  </files>
+</package>
