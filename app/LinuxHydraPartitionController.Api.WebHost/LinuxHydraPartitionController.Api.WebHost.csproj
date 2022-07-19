@@ -7,6 +7,7 @@
     <Description>WebApi for managing Hydra partitions on Linux</Description>
     <IsPackable>true</IsPackable>
     <NuspecFile>deploy.nuspec</NuspecFile>
+    <NuspecProperties>version=$(PackageVersion)</NuspecProperties>
     <PackageProjectUrl>https://github.com/mtlucas/Hydra_partition_controller</PackageProjectUrl>
     <Copyright>© 2022</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
