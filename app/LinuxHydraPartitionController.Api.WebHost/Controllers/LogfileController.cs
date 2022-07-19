@@ -38,7 +38,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         public IActionResult Get([FromRoute] int id)
         {
             var logfile = new Logfile(_logger, id, Configuration);
-            LogFileProps logfileprops = new LogFileProps();
+            List<LogFileProps> logfileprops = new List<LogFileProps>();
             try
             {
                 logfileprops = logfile.GetLogFileProps(id);
@@ -52,16 +52,14 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         }
 
         // Download logfile using text/plain ContentType
-        [HttpGet("{id:int}/download")]
-        public async Task<ActionResult> DownloadFile([FromRoute] int id)
+        [HttpGet("download/{logfilename}")]
+        public async Task<ActionResult> DownloadFile([FromRoute] string logfilename)
         {
-            var logfile = new Logfile(_logger, id, Configuration);
-            LogFileProps logfileprops = new LogFileProps();
+            String logfilePath = Configuration.GetSection("LogfilePath").Get<String>();
             try
             {
-                logfileprops = logfile.GetLogFileProps(id);
-                var bytes = await System.IO.File.ReadAllBytesAsync(logfileprops.logfileName);
-                return File(bytes, "text/plain", Path.GetFileName(logfileprops.logfileName));
+                var bytes = await System.IO.File.ReadAllBytesAsync(logfilePath + "/" + logfilename);
+                return File(bytes, "text/plain", Path.GetFileName(logfilePath + "/" + logfilename));
             }
             catch (Exception ex)
             {

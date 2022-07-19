@@ -13,7 +13,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
     public class Logfile
     {
         public int Id { get; }
-        public LogFileProps logFileProps = new LogFileProps();
+        List<LogFileProps> logFileProps = new List<LogFileProps>();
 
         private readonly ILogger<Logfile> _logger;
         private readonly IConfiguration Configuration;
@@ -26,16 +26,17 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var manageProcess = new ManageProcess(_logger);
         }
 
-        public LogFileProps GetLogFileProps(int Id)
+        public List<LogFileProps> GetLogFileProps(int Id)
         {
             String logfilePath = Configuration.GetSection("LogfilePath").Get<String>();
             var inputDirectory = new DirectoryInfo(logfilePath);
-            var latestFile = inputDirectory.GetFiles($"*hpu-{Id}*.log").OrderByDescending(f => f.LastWriteTime).First();
+            List<FileInfo> latestFile = inputDirectory.GetFiles($"*hpu-{Id}*.log").OrderByDescending(x =>  x.LastWriteTime).ToList();
 
-            logFileProps.logfileName = latestFile.FullName;
-            TimeSpan t = latestFile.LastWriteTimeUtc - new DateTime(1970, 1, 1);
-            logFileProps.logfileUnixTime = (long)t.TotalSeconds;
-            logFileProps.logfileSize = latestFile.Length;
+            foreach (FileInfo latestFileItem in latestFile)
+            {
+                TimeSpan t = latestFileItem.LastWriteTimeUtc - new DateTime(1970, 1, 1);
+                logFileProps.Add(new LogFileProps { logfileName = latestFileItem.Name, logfileSize = latestFileItem.Length, logfileUnixTime = (long)t.TotalSeconds });
+            }
             return logFileProps;
         }
     }
