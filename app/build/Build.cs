@@ -97,7 +97,7 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
                 .EnableNoRestore()
-                .SetVersion(BuildVersion)
+                .SetPackageVersion(BuildVersion)
                 .SetOutputDirectory(ArtifactsDirectory / "nuget"));
         });
 
