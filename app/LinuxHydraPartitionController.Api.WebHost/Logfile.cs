@@ -30,7 +30,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
         {
             String logfilePath = Configuration.GetSection("LogfilePath").Get<String>();
             var inputDirectory = new DirectoryInfo(logfilePath);
-            List<FileInfo> latestFile = inputDirectory.GetFiles($"*hpu-{Id}*.log").OrderByDescending(x =>  x.LastWriteTime).ToList();
+            List<FileInfo> latestFile = inputDirectory.GetFiles($"*hpu-{Id}-*.log").OrderByDescending(x => x.LastWriteTime).ToList();  // Limit to maximum of 10 latest results
 
             foreach (FileInfo latestFileItem in latestFile)
             {

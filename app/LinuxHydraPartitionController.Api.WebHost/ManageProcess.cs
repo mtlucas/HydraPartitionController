@@ -25,7 +25,12 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var proc = new Process { StartInfo = processStartInfo };
             int[] validCodes = validCodeString.Split(',').Select(s => int.TryParse(s, out int n) ? n : 0).ToArray();
             proc.Start();
-            while (!proc.WaitForExit(1000));
+            while (!proc.WaitForExit(10000))
+            {
+                proc.Kill();
+                _logger.Log(LogLevel.Warning, $"WARNING: Execute CMD timed out (10s) --> Process killed.");
+                return "WARNING: Execute CMD timed out (10s) --> Process killed.";
+            };
             var errorOutput = proc.StandardError.ReadToEnd();
             if (errorOutput.Length > 0 || !validCodes.Contains(proc.ExitCode))
             {
@@ -43,11 +48,11 @@ namespace LinuxHydraPartitionController.Api.WebHost
             //_logger.Log(LogLevel.Information, $"CMD: {cmd}");
             return new ProcessStartInfo
             {
-                FileName = "/usr/bin/bash",
+                FileName = "/usr/bin/sudo",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                Arguments = $"-c \"{cmd}\""
+                Arguments = $"{cmd}"
             };
         }
     }

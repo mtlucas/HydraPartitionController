@@ -19,7 +19,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
         public static readonly IEnumerable<Status> _partitions;
         private readonly ILogger<Status> _logger;
         private readonly ProcessStartInfo _statusProcessStartInfo;
-        
+
         internal Status(ILogger<Status> logger, int id)
         {
             _logger = logger;

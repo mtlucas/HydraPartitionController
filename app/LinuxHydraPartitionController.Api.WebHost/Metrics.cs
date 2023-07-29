@@ -29,7 +29,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
         public MachineMetrics GetMetrics()
         {
             var manageProcess = new ManageProcess(_logger);
-            ProcessStartInfo machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/nproc;/usr/bin/cat /proc/loadavg|/usr/bin/awk '{print $1\\\"\\n\\\"$2\\\"\\n\\\"$3}'");
+            ProcessStartInfo machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/bash -c \"/usr/bin/nproc;/usr/bin/cat /proc/loadavg|/usr/bin/awk '{print $1\\\"\\n\\\"$2\\\"\\n\\\"$3}'\"");
             var cpuLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
             if (cpuLines[0].StartsWith("WARNING"))
             {
@@ -39,7 +39,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             {
                 cpu = new CPU(cpuLines);
             }
-            machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/free -m|/usr/bin/head -2|/usr/bin/tail -n +2|/usr/bin/awk '{print $2\\\"\\n\\\"$3\\\"\\n\\\"$4\\\"\\n\\\"$6\\\"\\n\\\"$7}'");
+            machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/bash -c \"/usr/bin/free -m|/usr/bin/head -2|/usr/bin/tail -n +2|/usr/bin/awk '{print $2\\\"\\n\\\"$3\\\"\\n\\\"$4\\\"\\n\\\"$6\\\"\\n\\\"$7}'\"");
             var memLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
             if (memLines[0].StartsWith("WARNING"))
             {
@@ -49,7 +49,7 @@ namespace LinuxHydraPartitionController.Api.WebHost
             {
                 memory = new MemoryInMB(memLines);
             }
-            machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/cat /proc/uptime|/usr/bin/awk '{print int($1)}'");
+            machineMetricsProcessStartInfo = manageProcess.BuildProcessStartInfo("/usr/bin/bash -c \"/usr/bin/cat /proc/uptime|/usr/bin/awk '{print int($1)}'\"");
             var uptimeLines = manageProcess.Execute(machineMetricsProcessStartInfo).Split("\n");
             if (uptimeLines[0].StartsWith("WARNING"))
             {
