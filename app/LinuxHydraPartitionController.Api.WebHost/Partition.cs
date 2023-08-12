@@ -33,19 +33,29 @@ namespace LinuxHydraPartitionController.Api.WebHost
             Id = id;
 
             var manageProcess = new ManageProcess(_logger);
-            const string systemctl = "/usr/bin/sudo /usr/bin/systemctl ";
+            string serviceName;
+            const string systemctl = "/usr/bin/systemctl --no-pager ";
+
+            if (Id == 0)
+            {
+                serviceName = $"gos_lus.service";
+            }
+            else
+            {
+                serviceName = $"gos_hpu_{Id}.service";
+            }
 
             StartEndpoint = new Endpoint($"/partitions/{Id}/start", "POST");
-            _startProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"start gos_hpu_{Id}.service");
+            _startProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"start {serviceName}");
 
             StopEndpoint = new Endpoint($"/partitions/{Id}/stop", "POST");
-            _stopProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"stop gos_hpu_{Id}.service");
+            _stopProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"stop {serviceName}");
 
             RestartEndpoint = new Endpoint($"/partitions/{Id}/restart", "POST");
-            _restartProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"restart gos_hpu_{Id}.service");
+            _restartProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"restart {serviceName}");
 
             StatusEndpoint = new Endpoint($"/partitions/{Id}", "GET");
-            _statusProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"status gos_hpu_{Id}.service");
+            _statusProcessStartInfo = manageProcess.BuildProcessStartInfo(systemctl + $"status {serviceName}");
         }
 
         public bool IdMatches(int id)

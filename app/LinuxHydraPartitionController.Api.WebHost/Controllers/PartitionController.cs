@@ -88,11 +88,21 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
                 var gosConfig = JsonSerializer.Deserialize<GosConfig>(jsonString);
                 gosConfig.machines.ForEach(machineConfig =>
                 {
-                    machineConfig.partitions.ForEach(partitionConfig =>
+                    string machineName = machineConfig.machineName.ToLower();
+                    if (machineName == (Environment.MachineName.ToLower().Split('.')[0]))
                     {
-                        var partition = new Partition(_logger, partitionConfig.partition);
-                        partitions.Add(partition);
-                    });
+                        if (machineConfig.lusEnabled)
+                        {
+                            // LUS partition equals 0
+                            var partition = new Partition(_logger, 0);
+                            partitions.Add(partition);
+                        }
+                        machineConfig.partitions.ForEach(partitionConfig =>
+                        {
+                            var partition = new Partition(_logger, partitionConfig.partition);
+                            partitions.Add(partition);
+                        });
+                    }
                 });
             }
             return partitions;

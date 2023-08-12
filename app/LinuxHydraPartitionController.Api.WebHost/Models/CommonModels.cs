@@ -13,6 +13,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Models
     public class MachineConfig
     {
         public string machineName { get; set; }
+        public bool lusEnabled { get; set; }
         public List<PartitionConfig> partitions { get; set; }
     }
     public class PartitionConfig

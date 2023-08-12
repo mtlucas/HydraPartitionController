@@ -45,7 +45,7 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
         {
             return GetPartitionById(id);
         }
-        
+
         private Status GetPartitionById(int id)
         {
             return _partitions.ToArray().Single(partition => partition.IdMatches(id));
@@ -61,11 +61,21 @@ namespace LinuxHydraPartitionController.Api.WebHost.Controllers
                 var gosConfig = JsonSerializer.Deserialize<GosConfig>(jsonString);
                 gosConfig.machines.ForEach(machineConfig =>
                 {
-                    machineConfig.partitions.ForEach(partitionConfig =>
+                    string machineName = machineConfig.machineName.ToLower();
+                    if (machineName == (Environment.MachineName.ToLower().Split('.')[0]))
                     {
-                        var partition = new Status(_logger, partitionConfig.partition);
-                        partitions.Add(partition);
-                    });
+                        if (machineConfig.lusEnabled)
+                        {
+                            // LUS partition equals 0
+                            var partition = new Status(_logger, 0);
+                            partitions.Add(partition);
+                        }
+                        machineConfig.partitions.ForEach(partitionConfig =>
+                        {
+                            var partition = new Status(_logger, partitionConfig.partition);
+                            partitions.Add(partition);
+                        });
+                    }
                 });
             }
             return partitions;

@@ -28,7 +28,14 @@ namespace LinuxHydraPartitionController.Api.WebHost
             var manageProcess = new ManageProcess(_logger);
 
             StatusEndpoint = new Endpoint($"/partitions/{Id}", "GET");
-            _statusProcessStartInfo = manageProcess.BuildProcessStartInfo($"/usr/bin/sudo /usr/bin/systemctl status gos_hpu_{Id}.service");
+            if (Id == 0)
+            {
+                _statusProcessStartInfo = manageProcess.BuildProcessStartInfo($"/usr/bin/systemctl --no-pager status gos_lus.service");
+            }
+            else
+            {
+                _statusProcessStartInfo = manageProcess.BuildProcessStartInfo($"/usr/bin/systemctl --no-pager status gos_hpu_{Id}.service");
+            }
         }
 
         public bool IdMatches(int id)
